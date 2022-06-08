@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic', #new
     'django.contrib.staticfiles',
     'bootstrap3',
     'insta',
