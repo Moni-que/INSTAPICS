@@ -9,6 +9,7 @@ urlpatterns=[
     re_path(r'^signin',views.signin,name='signin'),
     re_path(r'^logout',views.logout,name='logout'),
     re_path(r'^upload',views.upload,name='upload'),
+    re_path(r'^like-post',views.like_post,name='like-post'),
     re_path(r'^profile',views.profile,name='profile'),
 
 ]
