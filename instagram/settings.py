@@ -17,30 +17,31 @@ import django_heroku
 from decouple import config,Csv
 
 # development
-# if config('MODE')=="dev":
-#    DATABASES = {
-#        'default': {
-#            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#            'NAME': config('DB_NAME'),
-#            'USER': config('DB_USER'),
-#            'PASSWORD': config('DB_PASSWORD'),
-#            'HOST': config('DB_HOST'),
-#            'PORT': '',
-#        }
+if config('MODE')=="dev":
+   DATABASES = {
+       'default': {
+           'ENGINE': 'django.db.backends.postgresql_psycopg2',
+           'NAME': config('DB_NAME'),
+           'USER': config('DB_USER'),
+           'PASSWORD': config('DB_PASSWORD'),
+           'HOST': config('DB_HOST'),
+           'PORT': '',
+       }
        
-#    }
-# # production
-# else:
-#    DATABASES = {
-#        'default': dj_database_url.config(
-#            default=config('DATABASE_URL')
-#        )
-#    }
+   }
+# production
+else:
+   DATABASES = {
+       'default': dj_database_url.config(
+           default=config('DATABASE_URL')
+       )
+   }
 DATABASES = {
        'default': dj_database_url.config(
            default=config('DATABASE_URL')
        )
    }
+   
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
@@ -111,14 +112,14 @@ WSGI_APPLICATION = 'instagram.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'instagram',
-#         'USER': 'moringa',
-#         'PASSWORD': '12345',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'instagram',
+        'USER': 'moringa',
+        'PASSWORD': '12345',
+    }
+}
 
 
 # Password validation
