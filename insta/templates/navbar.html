@@ -2,7 +2,7 @@
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="{% url 'home' %}">HOME</a>
-        <a class="navbar-brand" href="{% url 'profile' %}">PROFILE</a>
+        <a class="navbar-brand" href="{% url 'profile' user.id %}">PROFILE</a>
         <a class="navbar-brand" href="{% url 'admin:index' %}">ADMIN</a>
       </div>
       <!-- Adding a search form  -->

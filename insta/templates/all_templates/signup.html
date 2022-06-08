@@ -9,13 +9,15 @@
         {% endfor %}
         <form action="" method="POST">
             {% csrf_token %}
-            <input type="text" name="username" placeholder="Username">
-            <input type="email" name="email" placeholder="Email">
-            <input type="password" name="password" placeholder="Password">
-            <input type="text" name="confirm_password" placeholder="Confirm Password">
-            <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
-            <div class="text-center mt-5 space-x-2">
+            <div class="card">
+                <input type="text" name="username" placeholder="Username">
+                <input type="email" name="email" placeholder="Email">
+                <input type="password" name="password" placeholder="Password">
+                <input type="text" name="confirm_password" placeholder="Confirm Password">
+                <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
+                <div class="text-center mt-5 space-x-2">
                 <p class="text-base"> Already have an account? <a href="{% url 'signin' %}"> Login </a></p>
+            </div>
             </div>
         </form>
     </div>

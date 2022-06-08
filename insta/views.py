@@ -10,20 +10,18 @@ from django.contrib import messages
 @login_required(login_url = "signin")
 def home(request):
     user_object = User.objects.get(username=request.user.username)
-    user_profile = Profile.objects.get(user=user_object)
+    # user_profile = Profile.objects.get(user=user_object)
     posts = Image.objects.all()
-    return render(request, 'all_templates/home.html', {'user_profile': user_profile,'posts': posts })
+    return render(request, 'all_templates/home.html', {'posts': posts })
 
 @login_required(login_url = "signin")
 def upload(request):
     if request.method == 'POST':
-        user = request.user.username()
         image = request.FILES.get('image_upload')
         image_caption = request.POST['caption']
 
-        new_post = Image.objects.create(image=image, image_caption= image_caption, user=user)
+        new_post = Image.objects.create(image=image, image_caption= image_caption)
         new_post.save()
-
         return redirect('home')
     else:
         return redirect('home')
@@ -34,8 +32,8 @@ def like_post(request):
     pass
 
 @login_required(login_url = "signin")
-def profile(request):
-    user_profile = Profile.objects.get(user=request.user)
+def profile(request,user_id):
+    user_profile = Profile.objects.filter(id=user_id)
     if request.method == 'POST':
         if request.FILES.get('image') == None:
             image = user_profile.profile_photo
@@ -52,7 +50,7 @@ def profile(request):
             user_profile.bio = bio
             user_profile.save()
 
-        return redirect('profile')
+        return redirect('profile',user_id)
 
 
     return render(request, 'all_templates/profile.html', {'user_profile': user_profile})
