@@ -10,7 +10,6 @@ django-heroku==0.3.1
 filelock==3.7.1
 Pillow==9.1.1
 pipenv==2022.5.2
-pkg_resources==0.0.0
 platformdirs==2.5.2
 psycopg2==2.9.3
 python-decouple==3.6
