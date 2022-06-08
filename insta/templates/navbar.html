@@ -1,9 +1,10 @@
 <nav class="navbar navbar-info bg-info">
     <div class="container-fluid">
       <div class="navbar-header">
+        {% if user.is_anonymous %}
         <a class="navbar-brand" href="{% url 'home' %}">HOME</a>
         <a class="navbar-brand" href="{% url 'profile' user.id %}">PROFILE</a>
-        <a class="navbar-brand" href="{% url 'admin:index' %}">ADMIN</a>
+        {% endif %}
       </div>
       <!-- Adding a search form  -->
       <div class="col-sm-4 col-md-4 navbar-right">
