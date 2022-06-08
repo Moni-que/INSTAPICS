@@ -1,0 +1,33 @@
+{% load bootstrap3 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% block styles %}
+    {%  bootstrap_css %}
+        <link rel="stylesheet" href="{% static 'css/instagram.css' %}">
+    {% endblock %}
+</head>
+<body class="bg-danger">
+    {% include 'navbar.html' %}
+
+    <div class="">
+        {% block content %}
+            <h1 class="text-success">Hello Insta</h1>
+        {% endblock %}
+    </div>
+
+    <footer class="">
+        <p class="myfooter text-center">&copy; 2022 Made with love by Bambi</p>
+    </footer>
+
+    {% block scripts %}
+    {% bootstrap_javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% endblock %}
+</body>
+</html>

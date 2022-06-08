@@ -1,0 +1,127 @@
+{% extends 'all_templates/base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="left-side">
+                <!-- Logo -->
+                <div id="logo" class="container">
+                    <a href="home.html">
+                        <h1><b>INSTAPICS</b></h1>
+                    </a>
+                </div>
+        
+        
+                <!-- Adding a search form  -->
+                <div class="col-sm-5 col-md-4 ">
+            
+                    <form class="navbar-form" role="search" action="">
+                    {% csrf_token %}
+            
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search For Images" name="">
+                        <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+            
+                    </form>
+                </div>
+            </div>
+                <!-- search form end -->
+        </div>
+
+
+
+
+        <div class="col-md-4">
+            <div class="container">
+                <!-- post 1-->
+
+                
+
+                <div>
+                    {% for post in posts reversed %}
+                        <div><a href="#">@ {{ post.user }} </a></div>
+                        <div>
+                            <a href="{{ post.image.url }}"></a>  
+                                <img src="{{ post.image.url }}" alt="">
+                            </a>
+                        </div>
+                    {% endfor %}
+                    <div class="py-3 px-4 space-y-3"> 
+                        <div class="flex space-x-4 lg:font-bold">
+                            <a href="#" class="flex items-center space-x-2">
+                                <div class="p-2 rounded-full text-black">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="25" height="25" class="">
+                                        <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
+                            <div class="">
+                                <a href="#"><strong>{{ post.user }}</strong></a> {{ post.image_caption }}
+                                <!-- Liked <strong> taiye</strong> and <strong> 209 Others </strong> -->
+                            </div>
+                            <div>
+                                <div>
+                                    <img src="" alt="">
+                                </div>
+                                <div>
+                                    <p>Y'all like billie eillish?</p>
+                                    <p>She's my favourite </p>
+                                </div>
+                            </div>
+                        <div>
+                            <input type="text" placeholder="post a comment">
+                            <input type="submit" class="btn btn-primary btn-md" value="Post">
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="col-md-3 text-end">
+            <div class="bg-success">
+                <ul>
+                    <li><a href="profile.html"> Account settings </a> </li>
+                    <li><a href="signin.html"> Log Out</a></li>
+                </ul>
+            </div>
+            <div class="right-side lg:pr-4">
+
+                <!-- notivication header -->
+                <form action="upload" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div>
+                        <h4>Upload Pics</h4>
+                    </div>
+        
+                    <!-- notification contents -->
+                    <div class="flex justify-center flex-center text-center">
+        
+                        <div class="flex flex-col choose-upload text-center">
+                            <div>
+                                <input type="file" name="image_upload">
+                                <textarea name="caption" placeholder="Add Caption"></textarea> <br>
+                                <input type="submit" class="btn btn-primary btn-md" value="Upload">
+                            </div>
+                        </div>
+        
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
