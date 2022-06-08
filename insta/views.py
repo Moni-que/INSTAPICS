@@ -30,6 +30,10 @@ def upload(request):
     # return render(request, 'all_templates/upload.html')
 
 @login_required(login_url = "signin")
+def like_post(request):
+    pass
+
+@login_required(login_url = "signin")
 def profile(request):
     user_profile = Profile.objects.get(user=request.user)
     if request.method == 'POST':
