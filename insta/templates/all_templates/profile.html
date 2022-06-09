@@ -21,4 +21,11 @@
         <input type="submit" class="profile_button btn btn-primary btn-sm" value="Save">
     </form>
 </div>
+
+{% for user_profile in user_profile %}
+{%if user_profile.profile_photo%}
+<img src="{{user_profile.profile_photo.url}}" alt="" style="border-radius:50%; width: 20%;">
+{%endif%}
+<h1>{{user_profile.bio}}</h1>
+{% endfor %}
 {% endblock %}

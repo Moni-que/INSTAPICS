@@ -17,10 +17,10 @@ def home(request):
 @login_required(login_url = "signin")
 def upload(request):
     if request.method == 'POST':
-        image = request.FILES.get('image_upload')
-        image_caption = request.POST['caption']
+        image=request.FILES.get('image_upload')
+        image_caption=request.POST['caption']
 
-        new_post = Image.objects.create(image=image, image_caption= image_caption)
+        new_post=Image.objects.create(image=image, image_caption=image_caption)
         new_post.save()
         return redirect('home')
     else:
@@ -50,24 +50,22 @@ def like_post(request):
 
 @login_required(login_url="signin")
 def profile(request,user_id):
-    user_profile = Profile.objects.filter(id=user_id)
+
+    user_profile = Profile.objects.all()
     if request.method == 'POST':
-        if request.FILES.get('image') == None:
-            image = user_profile.profile_photo
+            image=request.FILES.get('image')
             bio = request.POST['bio']
+            profile=Profile.objects.create(profile_photo=image, bio=bio)
+            profile.save()
 
-            user_profile.profile_photo = image
-            user_profile.bio = bio
-            user_profile.save()
-        if request.FILES.get('image') != None:
-            image = request.FILES.get('image')
-            bio = request.POST['bio']
+            if request.FILES.get('image') != None:
+               image = request.FILES.get('image')
+               bio = request.POST['bio']
 
-            user_profile.profile_photo = image
-            user_profile.bio = bio
-            user_profile.save()
+               user_profile.profile_photo = image
+               user_profile.bio = bio
 
-        return redirect('profile',user_id)
+            return redirect('profile',user_id)
 
 
     return render(request, 'all_templates/profile.html', {'user_profile': user_profile})
@@ -93,9 +91,6 @@ def signup(request):
                 #login user and redirect to settings page
                 user_login = auth.authenticate(username=username, password=password)
                 # auth.login(request, user_login)
-
-
-                
                 return redirect('signin')
 
         else:
