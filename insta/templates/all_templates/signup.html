@@ -1,25 +1,39 @@
 {% extends 'all_templates/base.html' %}
 {% load bootstrap3 %}
 {% block content %}
-<div id="wrapper" class="flex flex-col justify-between h-screen">
-    <div class="lg:p-12 max-w-md max-w-xl lg:my-0 my-12 mx-auto p-6 space-y-">
-        <h2 class="lg:text-3xl text-xl font-semibold mb-6"> Sign Up</h2>
-        {% for message in messages %}
+
+
+<h2 class="text-center">Sign Up</h2>
+
+    {% for message in messages %}
         <h5>{{ message }}</h5>
-        {% endfor %}
-        <form action="" method="POST">
-            {% csrf_token %}
-            <div class="card">
-                <input type="text" name="username" placeholder="Username">
-                <input type="email" name="email" placeholder="Email">
-                <input type="password" name="password" placeholder="Password">
-                <input type="text" name="confirm_password" placeholder="Confirm Password">
-                <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
-                <div class="text-center mt-5 space-x-2">
-                <p class="text-base"> Already have an account? <a href="{% url 'signin' %}"> Login </a></p>
-            </div>
-            </div>
-        </form>
+    {% endfor %}
+
+<div class="my_signup_div">
+  <form action="" method="POST">
+    {% csrf_token %}
+    <label for="username">Username</label>
+    <input class="signup_input" type="text" id="username" name="username" placeholder="Username..">
+
+    <label for="email">Email</label>
+    <input class="signup_input" type="email" id="email" name="email" placeholder="Email..">
+
+    <label for="password">Password</label>
+    <input class="signup_input" type="password" id="password" name="password" placeholder="Password..">
+
+    <label for="confirm_password">Confirm Password</label>
+    <input class="signup_input" type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password..">
+  
+    <input type="submit" class="signup_button btn btn-primary btn-sm" value="Sign Up">
+
+    <div class="text-center mt-5 space-x-2">
+        <p class="text-base"> Already have an account? <b><a href="{% url 'signin' %}"> Login </a></b></p>
     </div>
+  </form>
 </div>
+
+
+
+
+
 {% endblock %}
