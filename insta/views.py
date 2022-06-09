@@ -10,9 +10,9 @@ from django.contrib import messages
 @login_required(login_url = "signin")
 def home(request):
     user_object = User.objects.get(username=request.user.username)
-    # user_profile = Profile.objects.get(user=user_object)
+    user_profile = Profile.objects.filter(user=user_object)
     posts = Image.objects.all()
-    return render(request, 'all_templates/home.html', {'posts': posts })
+    return render(request, 'all_templates/home.html', {'posts': posts, 'user_profile': user_profile })
 
 @login_required(login_url = "signin")
 def upload(request):
