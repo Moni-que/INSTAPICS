@@ -2,26 +2,23 @@
 {% load bootstrap3 %}
 
 {% block content %}
-    <h1> Account Setting for <b>{{ user.username }}</b> </h1>
-    
-    <hr>
 
+
+
+<h2 class="text-center"> Account Setting for <b>{{ user.username }}</b> </h2>
+{% for message in messages %}
+    <h5>{{ message }}</h5>
+{% endfor %}
+<hr>
+
+<div class="my_signin_div">
     <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div>
-            <div>
-                <div class="col-span-2">
-                    <label for=""> Profile Photo</label>
-                    <img src="{{ user_profile.profile_photo }}" alt="">
-                    <input type="file" name="image">
-                </div>
-                <div class="col-span-2">
-                    <textarea id="bio" name="bio" rows="3" placeholder="BIO">{{ user_profile.bio }}</textarea>
-                </div> 
-            </div> 
-            <div>
-                <input type="submit" class="btn btn-primary btn-sm" value="Save">
-            </div>
-        </div>
+    {% csrf_token %}
+        <label class="profile_label" for="Profile_Photo">Profile Photo</label>
+        <img class="profile_image" src="{{ user_profile.profile_photo }}" alt="">
+        <input type="file" name="image">
+        <textarea class="my_textarea" id="bio" name="bio" rows="3" placeholder="BIO">{{ user_profile.bio }}</textarea>
+        <input type="submit" class="profile_button btn btn-primary btn-sm" value="Save">
     </form>
+</div>
 {% endblock %}

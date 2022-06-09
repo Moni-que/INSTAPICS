@@ -10,18 +10,19 @@
     {% endfor %}
 
 <div class="my_signin_div">
-  <form action="" method="POST">
+    <form action="" method="POST">
     {% csrf_token %}
-    <label for="fname">Username</label>
-    <input class="signin_input" type="text" id="username" name="username" placeholder="Your username..">
+        <label for="fname">Username</label>
+        <input class="signin_input" type="text" id="username" name="username" placeholder="Your username..">
 
-    <label for="lname">Password</label>
-    <input class="signin_input" type="password" id="password" name="password" placeholder="Your password..">
+        <label for="lname">Password</label>
+        <input class="signin_input" type="password" id="password" name="password" placeholder="Your password..">
 
-    <input type="submit" class="signin_button btn btn-primary btn-sm" value="Log In">
+        <input type="submit" class="signin_button btn btn-primary btn-sm" value="Log In">
 
-    <div class="mt-5">
-        <p class="">Don't Have An account?<b><a href="{% url 'signup' %}" class=""> Sign Up</a></b></p>
-    </div>
+        <div class="mt-5">
+            <p class="">Don't Have An account?<b><a href="{% url 'signup' %}" class=""> Sign Up</a></b></p>
+        </div>
+    </form>
 </div>
 {% endblock %}
