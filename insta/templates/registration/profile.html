@@ -1,0 +1,8 @@
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+        <label class="profile_label" for="Profile_Photo">Profile Photo</label>
+        <img class="profile_image" src="{{ user_profile.profile_photo }}" alt="">
+        <input type="file" name="image">
+        <textarea class="my_textarea" id="bio" name="bio" rows="3" placeholder="BIO">{{ user_profile.bio }}</textarea>
+        <input type="submit" class="profile_button btn btn-primary btn-sm" value="Save">
+    </form>

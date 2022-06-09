@@ -1,6 +1,6 @@
 from email.mime import image
 from django.shortcuts import render,redirect
-from .models import Profile, Image
+from .models import Profile, Image, LikePost
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse,HttpResponseRedirect
 from django.contrib.auth.models import User,auth
@@ -29,9 +29,26 @@ def upload(request):
 
 @login_required(login_url = "signin")
 def like_post(request):
-    pass
+    username = request.user.username
+    post_id = request.GET.get('post_id')
 
-@login_required(login_url = "signin")
+    post = Image.objects.get(id=post_id)
+
+    like_filter = LikePost.objects.filter(post_id=post_id, username=username).first()
+
+    if like_filter == None:
+        new_like = LikePost.objects.create(post_id=post_id, username=username)
+        new_like.save()
+        post.no_of_likes = post.no_of_likes+1
+        post.save()
+        return redirect('home')
+    else:
+        like_filter.delete()
+        post.no_of_likes = post.no_of_likes-1
+        post.save()
+        return redirect('home')
+
+@login_required(login_url="signin")
 def profile(request,user_id):
     user_profile = Profile.objects.filter(id=user_id)
     if request.method == 'POST':
@@ -75,14 +92,11 @@ def signup(request):
 
                 #login user and redirect to settings page
                 user_login = auth.authenticate(username=username, password=password)
-                auth.login(request, user_login)
+                # auth.login(request, user_login)
 
 
-                #create a profile object for the new user
-                user_model = User.objects.get(username=username)
-                new_profile = Profile.objects.create(user=user_model)
-                new_profile.save()
-                return redirect('profile')
+                
+                return redirect('signin')
 
         else:
             messages.info(request, 'Passwords must match')
