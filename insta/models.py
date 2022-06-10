@@ -46,5 +46,12 @@ class Image(models.Model):
 class LikePost(models.Model):
     post_id = models.CharField(max_length=500)
     username = models.CharField(max_length=100)
+
+    def save_like(self):
+        return self.save()
+
+    def delete_like(self):
+        return self.delete()
+
     def __str__(self):
         return self.username
