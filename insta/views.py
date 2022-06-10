@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse,HttpResponseRedirect
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
+from itertools import chain
 
 # Create your views here.
 @login_required(login_url = "signin")
@@ -50,7 +51,6 @@ def like_post(request):
 
 @login_required(login_url="signin")
 def profile(request,user_id):
-
     user_profile = Profile.objects.all()
     if request.method == 'POST':
             image=request.FILES.get('image')
@@ -118,3 +118,20 @@ def signin(request):
 def logout(request):
     auth.logout(request)
     return redirect('signin')
+
+@login_required(login_url = "signin")
+def search(request):
+    user_object = User.objects.get(username=request.user.username)
+    user_profile = Profile.objects.get(user=user_object)
+    if request.method == 'POST':
+        username = request.POST['username']
+        username_object = User.objects.filter(username__icontains=username)
+        username_profile = []
+        username_profile_list = []
+        for users in username_object:
+            username_profile.append(users.id)
+        for ids in username_profile:
+            profile_lists = Profile.objects.filter(id=ids)
+            username_profile_list.append(profile_lists)
+            username_profile_list = list(chain(*username_profile_list))
+    return render(request, 'all_templates/search.html', {'user_profile': user_profile, 'username_profile_list': username_profile_list})
